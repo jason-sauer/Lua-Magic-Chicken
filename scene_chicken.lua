@@ -47,7 +47,7 @@ end
 function scene:enterScene( event )
   local group = self.view
 
-  chickenSounds = audio.loadStream("audio/chicken_coop.wav")
+  chickenSounds = audio.loadStream("audio/chicken_coop.mp3")
   chickenSoundsChannel = audio.play( chickenSounds )
 
   function switchToAnswerScene()
