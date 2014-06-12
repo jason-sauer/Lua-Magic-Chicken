@@ -7,9 +7,6 @@ local globals = require( "globals" )
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
--- Clear previous scene
-storyboard.removeAll()
-
 -- local forward references should go here --
 chickenSounds = nil
 chickenSoundsChannel = nil
@@ -20,6 +17,12 @@ chickenSoundsChannel = nil
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+
+  -- Add a background
+  local background = display.newImageRect("images/chicken_bg.png",globals.display._W,globals.display._H)
+  background.x = globals.display._centerW
+  background.y = globals.display._centerH
+  group:insert(background)
 
   local sceneTitle = display.newText( "Ask the Chicken your Question", 0, 0, globals.font.bold, 18 )
   sceneTitle.x = display.contentCenterX
@@ -45,13 +48,17 @@ end
 
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
+  -- Clear previous scene
+  local previousScene=storyboard.getPrevious()
+  storyboard.purgeScene(previousScene)
+  
   local group = self.view
 
   chickenSounds = audio.loadStream("audio/chicken_coop.mp3")
   chickenSoundsChannel = audio.play( chickenSounds )
 
   function switchToAnswerScene()
-   storyboard.gotoScene( "scene_answer" ) 
+   storyboard.gotoScene( "scene_answer", {effect = "slideUp"} ) 
   end
 
   local chicken_squawk = audio.loadSound( "audio/chicken_squawk.mp3")

@@ -8,9 +8,6 @@ local sfx = require( "sfx" )
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
--- Clear previous scene
-storyboard.removeAll()
-
 -- local forward references should go here --
 backgroundMusic = nil
 backgroundMusicChannel = nil
@@ -24,7 +21,11 @@ backgroundMusicChannel = nil
 function scene:createScene( event )
   local group = self.view
 
-  -- local clickSound = audio.loadSound( "audio/click.mp3");
+  local background = display.newImageRect("images/menu_bg.png",globals.display._W,globals.display._H)
+  background.x = globals.display._centerW
+  background.y = globals.display._centerH
+  group:insert(background)
+  
   
   local sceneTitle = display.newText( "Magic Chicken", 0, 0, globals.font.bold, 36 )
   sceneTitle.x = display.contentCenterX
@@ -35,16 +36,30 @@ function scene:createScene( event )
   local visitChickenButton = display.newText( "Visit the Magic Chicken", 0, 0, globals.font.regular, 18 )
   visitChickenButton.x = display.contentCenterX
   visitChickenButton.y = display.contentCenterY + 80
+
+  local viewCreditsButton = display.newText( "Credits", 0, 0, globals.font.regular, 18 )
+  viewCreditsButton.x = display.contentCenterX
+  viewCreditsButton.y = display.contentCenterY + 120
   
-  local function onTap( event )
-    storyboard.gotoScene( "scene_chicken" )
+  
+  visitChickenButton:addEventListener( "tap", onChickenBtnTap )
+  viewCreditsButton:addEventListener( "tap", onCreditsBtnTap )
+  
+  group:insert( visitChickenButton )
+  group:insert( viewCreditsButton )
+
+  local function onChickenBtnTap( event )
+    storyboard.gotoScene( "scene_chicken", {effect = "slideUp",time = 800} )
     audio.play(sfx.clickSound)
+    audio.stop( backgroundMusic )
     audio.stop( backgroundMusicChannel )
     backgroundMusicChannel = nil
   end
-  visitChickenButton:addEventListener( "tap", onTap )
-  
-  group:insert( visitChickenButton )
+
+  local function onCreditsBtnTap( event )
+    storyboard.gotoScene( "scene_credits", {effect = "flip"} )
+    audio.play(sfx.clickSound)
+  end
 
 end
 
@@ -58,6 +73,10 @@ end
 
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
+  -- Clear previous scene
+  local previousScene=storyboard.getPrevious()
+  storyboard.purgeScene(previousScene)
+  
   local group = self.view
   backgroundMusic = audio.loadStream("audio/menu_music.mp3") 
   backgroundMusicChannel = audio.play( backgroundMusic )

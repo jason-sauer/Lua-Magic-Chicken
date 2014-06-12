@@ -8,10 +8,10 @@ local sfx = require( "sfx" )
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
--- Clear previous scene
-storyboard.removeAll()
-
 -- local forward references should go here --
+
+local physics = require( "physics" )
+physics.start()
 
 
 ---------------------------------------------------------------------------------
@@ -21,7 +21,12 @@ storyboard.removeAll()
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
-  local group = self.view  
+  local group = self.view
+
+  local background = display.newImageRect("images/answer_bg.png",globals.display._W,globals.display._H)
+  background.x = globals.display._centerW
+  background.y = globals.display._centerH
+  group:insert(background)
 
   local answerText = display.newText( "", 0, 0, globals.font.bold, 18 )
   answerText.x = display.contentCenterX
@@ -29,32 +34,32 @@ function scene:createScene( event )
   
   group:insert( answerText )
 
-  local mainMenuButton = display.newText( "Go Back to Main Menu", 0, 0, globals.font.bold, 18 )
-  mainMenuButton.x = display.contentCenterX
-  mainMenuButton.y = display.contentCenterY + 60
-
-  group:insert( mainMenuButton )
-
   local visitChickenButton = display.newText( "Ask Another Question", 0, 0, globals.font.regular, 18 )
   visitChickenButton.x = display.contentCenterX
-  visitChickenButton.y = display.contentCenterY + 100
+  visitChickenButton.y = display.contentCenterY + 60
 
   group:insert( visitChickenButton )
 
+  local mainMenuButton = display.newText( "Go Back to Main Menu", 0, 0, globals.font.bold, 18 )
+  mainMenuButton.x = display.contentCenterX
+  mainMenuButton.y = display.contentCenterY + 110
+
+  group:insert( mainMenuButton )
+
   local function onMenuBtnTap( event )
     audio.play(sfx.clickSound)
-    storyboard.gotoScene( "scene_menu" )
+    storyboard.gotoScene( "scene_menu", {effect = "zoomOutInRotate"} )
   end
   mainMenuButton:addEventListener( "tap", onMenuBtnTap )
 
   local function onQuestionBtnTap( event )
     audio.play(sfx.clickSound)
-    storyboard.gotoScene( "scene_chicken" )
+    storyboard.gotoScene( "scene_chicken", {effect = "slideDown"} )
   end
   visitChickenButton:addEventListener( "tap", onQuestionBtnTap )
 
   -- Create a table to hold all available answers
-  answers = {"Yes", "No", "Maybe", "Possibly", "Nope", "Sure", "Without a Doubt",
+  answers = {"Yesasdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf sadf", "No", "Maybe", "Possibly", "Nope", "Sure", "Without a Doubt",
              "Only on Tuesdays", "What'chu talkin' 'bout, Willis?"}
   -- Get a random number based on length of answers table
   temp = math.random(1,#answers)
@@ -74,6 +79,10 @@ end
 
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
+  -- Clear previous scene
+  local previousScene=storyboard.getPrevious()
+  storyboard.purgeScene(previousScene)
+
   local group = self.view
 
 end
