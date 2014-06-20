@@ -3,6 +3,7 @@
 -- This scene will display the credits and a button to go back to the main menu
 ---------------------------------------------------------------------------------
 local globals = require( "globals" )
+local sfx = require( "sfx" )
 
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
@@ -17,7 +18,7 @@ function scene:createScene( event )
   local group = self.view
 
   -- Add a background
-  local background = display.newImageRect("images/chicken_bg.png",globals.display._W,globals.display._H)
+  local background = display.newImageRect("images/credits_bg.png",globals.display._W,globals.display._H)
   background.x = globals.display._centerW
   background.y = globals.display._centerH
   group:insert(background)

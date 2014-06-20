@@ -42,8 +42,7 @@ function scene:createScene( event )
   viewCreditsButton.y = display.contentCenterY + 120
   
   
-  visitChickenButton:addEventListener( "tap", onChickenBtnTap )
-  viewCreditsButton:addEventListener( "tap", onCreditsBtnTap )
+  
   
   group:insert( visitChickenButton )
   group:insert( viewCreditsButton )
@@ -53,6 +52,7 @@ function scene:createScene( event )
     audio.play(sfx.clickSound)
     audio.stop( backgroundMusic )
     audio.stop( backgroundMusicChannel )
+    backgroundMusic = nil
     backgroundMusicChannel = nil
   end
 
@@ -60,6 +60,11 @@ function scene:createScene( event )
     storyboard.gotoScene( "scene_credits", {effect = "flip"} )
     audio.play(sfx.clickSound)
   end
+
+  visitChickenButton:addEventListener( "tap", onChickenBtnTap )
+  viewCreditsButton:addEventListener( "tap", onCreditsBtnTap )
+
+  
 
 end
 
@@ -78,8 +83,13 @@ function scene:enterScene( event )
   storyboard.purgeScene(previousScene)
   
   local group = self.view
-  backgroundMusic = audio.loadStream("audio/menu_music.mp3") 
-  backgroundMusicChannel = audio.play( backgroundMusic )
+  if audio.isChannelPlaying(1) then
+    -- do nothing
+  else
+    backgroundMusic = audio.loadStream("audio/menu_music.mp3") 
+    backgroundMusicChannel = audio.play( backgroundMusic, {channel = 1} )
+  end
+  
 end
 
 

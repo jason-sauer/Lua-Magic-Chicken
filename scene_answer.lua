@@ -28,7 +28,7 @@ function scene:createScene( event )
   background.y = globals.display._centerH
   group:insert(background)
 
-  local answerText = display.newText( "", 0, 0, globals.font.bold, 18 )
+  local answerText = display.newText( "", 0, 0, globals.display._W - 30, globals.display._H / 2, globals.font.bold, 18, "center" )
   answerText.x = display.contentCenterX
   answerText.y = display.contentCenterY - 20
   
