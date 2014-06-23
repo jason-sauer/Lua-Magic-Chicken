@@ -10,8 +10,8 @@ local scene = storyboard.newScene()
 
 -- local forward references should go here --
 
-local physics = require( "physics" )
-physics.start()
+-- local physics = require( "physics" )
+-- physics.start()
 
 
 ---------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ function scene:createScene( event )
   background.y = globals.display._centerH
   group:insert(background)
 
-  local answerText = display.newText( "", 0, 0, globals.display._W - 30, globals.display._H / 2, globals.font.bold, 18, "center" )
+  local answerText = display.newText( "", 0, 0, globals.font.bold, 18 )
   answerText.x = display.contentCenterX
   answerText.y = display.contentCenterY - 20
   
@@ -59,7 +59,7 @@ function scene:createScene( event )
   visitChickenButton:addEventListener( "tap", onQuestionBtnTap )
 
   -- Create a table to hold all available answers
-  answers = {"Yesasdf asdf asdf asdf asdf asdf asdf asdf asdf asdf asdf sadf", "No", "Maybe", "Possibly", "Nope", "Sure", "Without a Doubt",
+  answers = {"Yes", "No", "Maybe", "Possibly", "Nope", "Sure", "Without a Doubt",
              "Only on Tuesdays", "What'chu talkin' 'bout, Willis?"}
   -- Get a random number based on length of answers table
   temp = math.random(1,#answers)

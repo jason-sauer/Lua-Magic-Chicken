@@ -23,15 +23,27 @@ function scene:createScene( event )
   background.y = globals.display._centerH
   group:insert(background)
 
+  local sceneTitle = display.newText( "Credits", 0, 0, globals.font.bold, 36 )
+  sceneTitle.x = display.contentCenterX
+  sceneTitle.y = display.contentCenterY - 200
+  
+  group:insert( sceneTitle )
+
+  local creditsText = display.newText( "", globals.display._W - 300, globals.display._H - 400, globals.display._W - 60, globals.display._H, globals.font.bold, 16, "left" )
+
+  creditsText.text = "Main Menu Music:\nblah blah blah blah\n\nChicken Art:\nAnna DeBoer\n\nBackground Art:\nMaksim Ushkalov\n\nProgramming/Everything Else:\nJason Sauer"
+  
+  group:insert( creditsText )
+
   local mainMenuButton = display.newText( "Go Back to Main Menu", 0, 0, globals.font.bold, 18 )
   mainMenuButton.x = display.contentCenterX
-  mainMenuButton.y = display.contentCenterY + 110
+  mainMenuButton.y = display.contentCenterY + 160
 
   group:insert( mainMenuButton )
 
   local function onMenuBtnTap( event )
     audio.play(sfx.clickSound)
-    storyboard.gotoScene( "scene_menu", {effect = "flip"} )
+    storyboard.gotoScene( "scene_menu", {effect = "flip", time = 200} )
   end
   mainMenuButton:addEventListener( "tap", onMenuBtnTap )
 

@@ -57,7 +57,7 @@ function scene:createScene( event )
   end
 
   local function onCreditsBtnTap( event )
-    storyboard.gotoScene( "scene_credits", {effect = "flip"} )
+    storyboard.gotoScene( "scene_credits", {effect = "flip",time = 200} )
     audio.play(sfx.clickSound)
   end
 
