@@ -29,9 +29,9 @@ function scene:createScene( event )
   
   group:insert( sceneTitle )
 
-  local creditsText = display.newText( "", globals.display._W - 300, globals.display._H - 400, globals.display._W - 60, globals.display._H, globals.font.bold, 16, "left" )
+  local creditsText = display.newText( "", globals.display._W - 300, globals.display._H - 400, globals.display._W - 60, globals.display._H, globals.font.bold, 14, "left" )
 
-  creditsText.text = "Main Menu Music:\nblah blah blah blah\n\nChicken Art:\nAnna DeBoer\n\nBackground Art:\nMaksim Ushkalov\n\nProgramming/Everything Else:\nJason Sauer"
+  creditsText.text = "Chicken Art:\nAnna DeBoer\n\nBackground Art:\nMaksim Ushkalov\n\nProgramming/Everything Else:\nJason Sauer\n\nMain Menu Music:\n'Run Amok' Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 3.0. http://creativecommons.org/licenses/by/3.0/"
   
   group:insert( creditsText )
 

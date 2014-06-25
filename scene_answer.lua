@@ -28,7 +28,7 @@ function scene:createScene( event )
   background.y = globals.display._centerH
   group:insert(background)
 
-  local answerText = display.newText( "", 0, 0, globals.font.bold, 18 )
+  local answerText = display.newText( "", 0, 0, globals.font.bold, 16 )
   answerText.x = display.contentCenterX
   answerText.y = display.contentCenterY - 20
   
@@ -59,8 +59,15 @@ function scene:createScene( event )
   visitChickenButton:addEventListener( "tap", onQuestionBtnTap )
 
   -- Create a table to hold all available answers
-  answers = {"Yes", "No", "Maybe", "Possibly", "Nope", "Sure", "Without a Doubt",
-             "Only on Tuesdays", "What'chu talkin' 'bout, Willis?"}
+  answers = {"Yes", "No", "Maybe", "Possibly", "Nope", "Surely", "Without a doubt",
+             "Only on Tuesdays", "What'chu talkin' 'bout, Willis?", "It is within the realm of possibility",
+             "Answer unclear, ask again", "Not a chance", "Inconceivable!", "Absolutely", "Certainly",
+             "Definitely", "It is certain", "Affirmative", "Negative", "Unquestionably", "Of course",
+             "Indubitably", "Most assuredly", "It's a sure thing", "Absolutely not", "No chance", "Never",
+             "Are you kidding me?", "As I see it, yes", "Cannot predict now", "Concentrate and ask again",
+             "It is certain", "It is decidedly so", "Most likely", "My sources say no", "Outlook good", "Outlook not so good",
+             "Reply is hazy, try again", "All signs point to yes", "Very doubtful", "You may rely on it",
+             "Don't bet on it", "Surely you can't be serious"}
   -- Get a random number based on length of answers table
   temp = math.random(1,#answers)
   -- Choose text for the answer based on the random number chosen
