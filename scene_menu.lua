@@ -27,9 +27,9 @@ function scene:createScene( event )
   group:insert(background)
   
   
-  local sceneTitle = display.newText( "Magic Chicken", 0, 0, globals.font.bold, 36 )
+  local sceneTitle = display.newText( "Magic Chicken", 0, 0, globals.font.bold, 56 )
   sceneTitle.x = display.contentCenterX
-  sceneTitle.y = display.contentCenterY - 20
+  sceneTitle.y = display.contentCenterY - 140
   
   group:insert( sceneTitle )
   
@@ -62,9 +62,7 @@ function scene:createScene( event )
   end
 
   visitChickenButton:addEventListener( "tap", onChickenBtnTap )
-  viewCreditsButton:addEventListener( "tap", onCreditsBtnTap )
-
-  
+  viewCreditsButton:addEventListener( "tap", onCreditsBtnTap )  
 
 end
 

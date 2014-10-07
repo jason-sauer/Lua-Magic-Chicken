@@ -3,8 +3,8 @@ local globals = {}
 
 globals.font = 
 {
-  regular = native.systemFont,
-  bold = native.systemFontBold,
+  regular = "GiddyupStd",
+  bold = "GiddyupStd",
 }
 
 globals.display = {
